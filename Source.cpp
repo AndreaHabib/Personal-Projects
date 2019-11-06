@@ -20,7 +20,7 @@ struct task {
 };
 int counter = 0;
 int MAX = 100;
-task* list= new task[MAX];
+task* list = new task[MAX];
 SYSTEMTIME a;
 void addTask();
 void taskDone();
@@ -51,17 +51,19 @@ int main() {
 		cout << "6. Display all done tasks" << endl;
 		cout << "7. Display all overdue tasks" << endl;
 		cout << "8. Display all tasks that needs to be done today" << endl;
-		cout << "9. Search for specific task (using Title, Task Number, date" << endl;
-		int choice = 5;
-		do {
-			if (isdigit(choice))
-				cout << "Not a number!" << endl;
-			if (!cin.fail() && choice > 9 || choice < 1) {
-				cout << "Please enter a number between 1 and 9!" << endl;
-			}
-			cout << "Enter the number of task: ";
+		cout << "9. Search for specific task (using Title, Task Number, date)" << endl;
+		int choice = 11;
+		while (!cin || choice < 10 || choice > 0) {
+			cout << "Please enter a number between 1 and 9: ";
 			cin >> choice;
-		} while (isdigit(choice) && !cin.fail() && choice > 9 || choice < 1);
+			if (choice < 10 || choice > 0) {
+				cout << "Invalid number!" << endl;
+			}
+			else if (!cin) {
+				cout << "Must be a number!" << endl;
+				cin >> choice;
+			}
+		}
 		switch (choice) {
 		case 1:
 			addTask();
@@ -93,20 +95,18 @@ int main() {
 		default:
 			exit(1);
 		}
-		do
-		{
-			if (!cin.fail() && loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" && 
-				loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
-				loop != "nO" && loop != "N") {
-				system("CLS");
-				cout << "Please enter Yes or No!" << endl << flush;
-			}
+		while (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
+			loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
+			loop != "nO" && loop != "N") {
 			cout << "Would you like to choose another task?" << endl;
 			cin >> loop;
-		} while (!cin.fail() && loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
-			loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
-			loop != "nO" && loop != "N");
-		
+			if (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
+				loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
+				loop != "nO" && loop != "N") {
+				cout << "Please enter Y or N!" << endl;
+			}
+		}
+
 	}
 	outData();
 	system("PAUSE");
@@ -362,7 +362,7 @@ void numberSearch() {
 		cout << "Due date: " << '(' << list[taskNum - 1].day.month << '/' << list[taskNum - 1].day.day << '/' << list[taskNum - 1].day.year << ')' << endl;
 		cout << list[taskNum - 1].priority << endl;
 	}
-	if(taskNum > counter) {
+	if (taskNum > counter) {
 		cout << "TASK NUMBER INVALID!!" << endl;
 	}
 }
