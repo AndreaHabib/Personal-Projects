@@ -8,7 +8,7 @@
 using namespace std;
 enum month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec };
 struct date {
-	int day, month, year;
+	int day{}, month{}, year{};
 };
 struct task {
 	string title;
@@ -53,15 +53,13 @@ int main() {
 		cout << "8. Display all tasks that needs to be done today" << endl;
 		cout << "9. Search for specific task (using Title, Task Number, date)" << endl;
 		int choice = 11;
-		while (!cin || choice < 10 || choice > 0) {
+		while (!cin || choice > 10 || choice < 1) {
 			cout << "Please enter a number between 1 and 9: ";
 			cin >> choice;
-			if (choice < 10 || choice > 0) {
-				cout << "Invalid number!" << endl;
-			}
-			else if (!cin) {
-				cout << "Must be a number!" << endl;
-				cin >> choice;
+			if (cin && choice > 10 || choice < 1) {
+				cin.clear();
+				cout << "Invalid! Please enter a valid number!" << endl;
+				cin.ignore();
 			}
 		}
 		switch (choice) {
@@ -95,6 +93,7 @@ int main() {
 		default:
 			exit(1);
 		}
+		loop = "k";
 		while (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
 			loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
 			loop != "nO" && loop != "N") {
@@ -148,6 +147,7 @@ void taskDone() {
 	}
 }
 void edit() {
+	int part = 5;
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
@@ -155,22 +155,27 @@ void edit() {
 		string loop = "y";
 		while (loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS") {
 
-			int taskNum = counter;
-			do { // REMEMBER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				if (isdigit(taskNum)) {
-					cout << "Not a number!" << endl;
-				}
-				if (!cin.fail() && taskNum > counter || taskNum < counter) {
-					cout << "Task number not found! Please enter a number till " << counter << "!" << endl;
-				}
-				system("CLS");
-				cout << "Enter task number you want to edit: " << flush << endl;
+			int taskNum = counter + 1;
+			while (!cin || taskNum > counter || taskNum < 1) {
+				cout << "Please enter which task you would like edit: (from 1 to " << counter << ") ";
 				cin >> taskNum;
-			} while (!isdigit(taskNum) && !cin.fail() && taskNum > counter || taskNum < counter);
+				if (cin && taskNum > counter || taskNum < 1) {
+					cin.clear();
+					cout << "Task not found! Please enter a valid task!" << endl;
+					cin.ignore();
+				}
+			}
 			cout << "Which part would you like to edit?" << endl;
 			cout << "1. Title\n" << "2. Details\n" << "3. Date\n" << "4. Priority" << endl;
-			int part;
-			cin >> part;
+			while (!cin || part > 4 || part < 1) {
+				cout << "Please enter a number between 1 and 4: ";
+				cin >> part;
+				if (cin && part > 4 || part < 1) {
+					cin.clear();
+					cout << "Invalid! Please enter a valid number!" << endl;
+					cin.ignore();
+				}
+			}
 			switch (part) {
 			case 1:
 				cout << "New Title: ";
@@ -211,13 +216,18 @@ void Delete() { //swapping and deleting last row, but data is still saved in the
 		cout << "Please choose task you want to delete" << flush << endl;
 		int taskNum;
 		cin >> taskNum;
-		for (int i = taskNum; i < counter; i++) {
-			task temp;
-			temp = list[i];
-			list[i] = list[i + 1];
-			list[i + 1] = temp;
+		if (taskNum > counter) {
+			cout << "Task not found!" << endl;
 		}
-		counter--;
+		else {
+			for (int i = taskNum; i < counter; i++) {
+				task temp;
+				temp = list[i];
+				list[i] = list[i + 1];
+				list[i + 1] = temp;
+			}
+			counter--;
+		}
 	}
 }
 void displayAll() {
@@ -250,7 +260,7 @@ void displayDone() {
 				cout << list[taskNum].priority << endl;
 			}
 			else {
-				cout << "No tasks done!" << endl;
+				cout << "NO TASKS ARE DONE!" << endl;
 			}
 		}
 	}
@@ -312,9 +322,17 @@ void search() {
 	else {
 		system("CLS");
 		cout << "Which element would you like to use to search?" << flush << endl;
-		cout << "Please enter number 1 to 3: " << endl;
-		cout << "1. Title\n" << "2. Number\n" << "3. Date\n" << endl;
-		cin >> search;
+		cout << "1. Title\n" << "2. Number\n" << "3. Date\n";
+		search = 4;
+		while (!cin || search > 3 || search < 1) {
+			cout << "Please enter a number between 1 and 3: ";
+			cin >> search;
+			if (cin && search > 3 || search < 1) {
+				cin.clear();
+				cout << "Invalid! Please enter a valid number!" << endl;
+				cin.ignore();
+			}
+		}
 		switch (search) {
 		case 1:
 			stringSearch();
