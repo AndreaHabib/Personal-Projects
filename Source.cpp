@@ -10,7 +10,8 @@ using namespace std;
 struct date {
 	int day{}, month{}, year{};
 };
-struct task {
+class task {
+public:
 	string title;
 	string detail;
 	date day;
@@ -22,6 +23,7 @@ int counter = 0;
 int MAX = 100;
 task* list = new task[MAX];
 SYSTEMTIME a;
+//void expandTasks();
 void addTask();
 void taskDone();
 void edit();
@@ -112,6 +114,8 @@ int main() {
 	return 0;
 }
 void addTask() {
+	int numOfDays{ 33 };
+	GetLocalTime(&a);
 	counter++;
 	for (int taskNum = counter - 1; taskNum < counter; taskNum++) {
 		system("CLS");
@@ -121,10 +125,66 @@ void addTask() {
 		getline(cin, list[taskNum].title);
 		cout << "Details: ";
 		getline(cin, list[taskNum].detail);
-		cout << "Due date: (MM/DD/YYYY)" << endl;
-		cin >> list[taskNum].day.month;
-		cin >> list[taskNum].day.day;
-		cin >> list[taskNum].day.year;
+		list[taskNum].day.day = 33;
+		list[taskNum].day.year = 2018;
+		list[taskNum].day.month = 13;
+		while (list[taskNum].day.year < a.wYear || list[taskNum].day.month > 12 || list[taskNum].day.month < 1 || list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
+			cout << "Due date: (MM/DD/YYYY)" << endl;
+			cin >> list[taskNum].day.month;
+			cin >> list[taskNum].day.day;
+			cin >> list[taskNum].day.year;
+			switch (list[taskNum].day.month) {
+			case 1:
+				numOfDays = 31;
+				break;
+			case 2:
+				if ((list[taskNum].day.year % 4 == 0 && list[taskNum].day.year % 100 != 0) || list[taskNum].day.year % 400 == 0)
+					numOfDays = 29;
+				else numOfDays = 28;
+				break;
+			case 3:
+				numOfDays = 31;
+				break;
+			case 4:
+				numOfDays = 30;
+				break;
+			case 5:
+				numOfDays = 31;
+				break;
+			case 6:
+				numOfDays = 30;
+				break;
+			case 7:
+				numOfDays = 31;
+				break;
+			case 8:
+				numOfDays = 31;
+				break;
+			case 9:
+				numOfDays = 30;
+				break;
+			case 10:
+				numOfDays = 31;
+				break;
+			case 11:
+				numOfDays = 30;
+				break;
+			case 12:
+				numOfDays = 31;
+				break;
+			default:
+				cout << "Invalid month!" << endl;
+				break;
+			}
+			if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
+				cin.clear();
+				cout << "Invalid day for the month and year you entered!" << endl;
+				cin.ignore();
+			}
+			if (list[taskNum].day.year < a.wYear) {
+				cout << "Please enter a year within or after " << a.wYear << endl;
+			}
+		}
 		while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
 			cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
 			cin >> list[taskNum].priority;
@@ -188,10 +248,68 @@ void edit() {
 				getline(cin, list[taskNum - 1].detail);
 				break;
 			case 3:
-				cout << "New Due date: (MM/DD/YYYY)" << endl;
-				cin >> list[taskNum - 1].day.month;
-				cin >> list[taskNum - 1].day.day;
-				cin >> list[taskNum - 1].day.year;
+				int numOfDays;
+				GetLocalTime(&a);
+				list[taskNum - 1].day.day = 33;
+				list[taskNum - 1].day.year = 2018;
+				list[taskNum - 1].day.month = 13;
+				while (list[taskNum - 1].day.year < a.wYear || list[taskNum - 1].day.month > 12 || list[taskNum - 1].day.month < 1 || list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
+					cout << " New Due date: (MM/DD/YYYY)" << endl;
+					cin >> list[taskNum - 1].day.month;
+					cin >> list[taskNum - 1].day.day;
+					cin >> list[taskNum - 1].day.year;
+					switch (list[taskNum - 1].day.month) {
+					case 1:
+						numOfDays = 31;
+						break;
+					case 2:
+						if ((list[taskNum - 1].day.year % 4 == 0 && list[taskNum - 1].day.year % 100 != 0) || list[taskNum - 1].day.year % 400 == 0)
+							numOfDays = 29;
+						else numOfDays = 28;
+						break;
+					case 3:
+						numOfDays = 31;
+						break;
+					case 4:
+						numOfDays = 30;
+						break;
+					case 5:
+						numOfDays = 31;
+						break;
+					case 6:
+						numOfDays = 30;
+						break;
+					case 7:
+						numOfDays = 31;
+						break;
+					case 8:
+						numOfDays = 31;
+						break;
+					case 9:
+						numOfDays = 30;
+						break;
+					case 10:
+						numOfDays = 31;
+						break;
+					case 11:
+						numOfDays = 30;
+						break;
+					case 12:
+						numOfDays = 31;
+						break;
+					default:
+						cout << "Invalid month!" << endl;
+						break;
+					}
+					if (list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
+						cin.clear();
+						cout << "Invalid day for the month and year you entered!" << endl;
+						cin.ignore();
+					}
+					if (list[taskNum - 1].day.year < a.wYear) {
+						cout << "Please enter a year within or after " << a.wYear << endl;
+					}
+				}
 				break;
 			case 4:
 				while (list[taskNum - 1].priority > 9 || list[taskNum - 1].priority < 0) {
@@ -387,6 +505,7 @@ void numberSearch() {
 void dateSearch() {
 	system("CLS");
 	cout << flush;
+	bool found;
 	int day, month, year, taskNum = 0;
 	cout << "Please enter the date of task you are searching for" << endl;
 	cin >> day >> month >> year;
@@ -397,11 +516,12 @@ void dateSearch() {
 			cout << "Details: " << list[taskNum].detail << endl;
 			cout << "Due date: " << '(' << list[taskNum].day.month << '/' << list[taskNum].day.day << '/' << list[taskNum].day.year << ')' << endl;
 			cout << list[taskNum].priority << endl;
+			found = true;
 			break;
 		}
-		// {
-		//	cout << "TASK NOT FOUND!!" << endl;
-		//}
+	}
+	if (!found) {
+		cout << "Task was not found!" << endl;
 	}
 }
 int getData() {
@@ -417,6 +537,9 @@ int getData() {
 			exit(1);
 		} //adding while(!EOF) - title doesn't get read in for first task only
 		//but doesn't read title of second task
+		/*if (counter > MAX) {
+			expandTasks();
+		}*/
 		for (int taskNum = 0; taskNum < counter; taskNum++) {
 			getline(inData, list[taskNum].title);
 			getline(inData, list[taskNum].detail);
@@ -449,3 +572,6 @@ void outData() {
 	saveData.close();
 	taskData.close();
 }
+//void expandTasks() {
+//	
+//}
