@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <cctype>
 using namespace std;
-enum month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec };
+//enum month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec };
 struct date {
 	int day{}, month{}, year{};
 };
