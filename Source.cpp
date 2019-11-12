@@ -3,9 +3,10 @@
 int counter = 0;
 int MAX = 100;
 task* list = new task[MAX];
-SYSTEMTIME a;
+SYSTEMTIME today;
 int main() {
-	getData();
+	task call;
+	call.getData();
 	string loop = "y";
 	while (loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS") {
 		system("CLS");
@@ -32,31 +33,31 @@ int main() {
 		}
 		switch (choice) {
 		case 1:
-			addTask();
+			call.addTask();
 			break;
 		case 2:
-			taskDone();
+			call.taskDone();
 			break;
 		case 3:
-			edit();
+			call.edit();
 			break;
 		case 4:
-			Delete();
+			call.Delete();
 			break;
 		case 5:
-			displayAll();
+			call.displayAll();
 			break;
 		case 6:
-			displayDone();
+			call.displayDone();
 			break;
 		case 7:
-			displayOverdue();
+			call.displayOverdue();
 			break;
 		case 8:
-			displayDueToday();
+			call.displayDueToday();
 			break;
 		case 9:
-			search();
+			call.search();
 			break;
 		default:
 			exit(1);
@@ -75,11 +76,11 @@ int main() {
 		}
 
 	}
-	outData();
+	call.outData();
 	system("PAUSE");
 	return 0;
 }
-int getData() {
+int task::getData() {
 	ifstream inData, taskData;
 	inData.open("todo.txt");
 	taskData.open("tasknumber.txt");
@@ -111,7 +112,7 @@ int getData() {
 	}
 	return counter;
 }
-void outData() {
+void task::outData() {
 	ofstream saveData, taskData;
 	saveData.open("todo.txt");
 	taskData.open("tasknumber.txt");
