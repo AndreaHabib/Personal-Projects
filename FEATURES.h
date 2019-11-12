@@ -15,6 +15,22 @@ struct date {
 };
 class task {
 public:
+	//void expandTasks();
+	void addTask();
+	void taskDone();
+	void edit();
+	void Delete();
+	void displayAll();
+	void displayDone();
+	void displayOverdue();
+	void displayDueToday();
+	void search();
+	void stringSearch();
+	void numberSearch();
+	void dateSearch();
+	void outData();
+	int getData();
+private:
 	string title;
 	string detail;
 	date day;
@@ -22,19 +38,4 @@ public:
 	bool finished = false;
 	bool overdue = false;
 };
-//void expandTasks();
-void addTask();
-void taskDone();
-void edit();
-void Delete();
-void displayAll();
-void displayDone();
-void displayOverdue();
-void displayDueToday();
-void search();
-void stringSearch();
-void numberSearch();
-void dateSearch();
-void outData();
-int getData();
 #endif // !FEATRUES_H
