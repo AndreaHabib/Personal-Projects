@@ -3,10 +3,10 @@
 extern int counter;
 extern int MAX;
 extern task* list;
-extern SYSTEMTIME a;
-void addTask() {
+extern SYSTEMTIME today;
+void task::addTask() {
 	int numOfDays{ 33 };
-	GetLocalTime(&a);
+	GetLocalTime(&today);
 	counter++;
 	for (int taskNum = counter - 1; taskNum < counter; taskNum++) {
 		system("CLS");
@@ -19,7 +19,7 @@ void addTask() {
 		list[taskNum].day.day = 33;
 		list[taskNum].day.year = 2018;
 		list[taskNum].day.month = 13;
-		while (list[taskNum].day.year < a.wYear || list[taskNum].day.month > 12 || list[taskNum].day.month < 1 || list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
+		while (list[taskNum].day.year < today.wYear || list[taskNum].day.month > 12 || list[taskNum].day.month < 1 || list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
 			cout << "Due date: (MM/DD/YYYY)" << endl;
 			cin >> list[taskNum].day.month;
 			cin >> list[taskNum].day.day;
@@ -72,8 +72,8 @@ void addTask() {
 				cout << "Invalid day for the month and year you entered!" << endl;
 				cin.ignore();
 			}
-			if (list[taskNum].day.year < a.wYear) {
-				cout << "Please enter a year within or after " << a.wYear << endl;
+			if (list[taskNum].day.year < today.wYear) {
+				cout << "Please enter a year within or after " << today.wYear << endl;
 			}
 		}
 		while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
@@ -85,7 +85,7 @@ void addTask() {
 		}
 	}
 }
-void taskDone() {
+void task::taskDone() {
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
@@ -97,7 +97,7 @@ void taskDone() {
 		list[taskNum - 1].finished = true;
 	}
 }
-void edit() {
+void task::edit() {
 	int part = 5;
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
@@ -140,11 +140,11 @@ void edit() {
 				break;
 			case 3:
 				int numOfDays;
-				GetLocalTime(&a);
+				GetLocalTime(&today);
 				list[taskNum - 1].day.day = 33;
 				list[taskNum - 1].day.year = 2018;
 				list[taskNum - 1].day.month = 13;
-				while (list[taskNum - 1].day.year < a.wYear || list[taskNum - 1].day.month > 12 || list[taskNum - 1].day.month < 1 || list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
+				while (list[taskNum - 1].day.year < today.wYear || list[taskNum - 1].day.month > 12 || list[taskNum - 1].day.month < 1 || list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
 					cout << " New Due date: (MM/DD/YYYY)" << endl;
 					cin >> list[taskNum - 1].day.month;
 					cin >> list[taskNum - 1].day.day;
@@ -197,8 +197,8 @@ void edit() {
 						cout << "Invalid day for the month and year you entered!" << endl;
 						cin.ignore();
 					}
-					if (list[taskNum - 1].day.year < a.wYear) {
-						cout << "Please enter a year within or after " << a.wYear << endl;
+					if (list[taskNum - 1].day.year < today.wYear) {
+						cout << "Please enter a year within or after " << today.wYear << endl;
 					}
 				}
 				break;
@@ -216,7 +216,7 @@ void edit() {
 		}
 	}
 }
-void Delete() { //swapping and deleting last row, but data is still saved in the next location in array
+void task::Delete() { //swapping and deleting last row, but data is still saved in the next location in array
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
