@@ -3,8 +3,8 @@
 extern int counter;
 extern int MAX;
 extern task* list;
-extern SYSTEMTIME a;
-void displayAll() {
+extern SYSTEMTIME today;
+void task::displayAll() {
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
@@ -20,7 +20,7 @@ void displayAll() {
 		}
 	}
 }
-void displayDone() {
+void task::displayDone() {
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
@@ -39,19 +39,19 @@ void displayDone() {
 		}
 	}
 }
-void displayOverdue() {
+void task::displayOverdue() {
 	bool found = false;
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
 	else {
 		system("CLS");
-		GetLocalTime(&a);
+		GetLocalTime(&today);
 		cout << flush;
 		int taskNum = 0;
 		for (taskNum = 0; taskNum < counter; taskNum++) {
-			if (!(list[taskNum].finished) && ((a.wDay > list[taskNum].day.day) && (a.wMonth == list[taskNum].day.month) && (a.wYear == list[taskNum].day.year))
-				|| ((a.wMonth > list[taskNum].day.month) && (a.wYear == list[taskNum].day.year)) || (a.wYear > list[taskNum].day.year)) {
+			if (!(list[taskNum].finished) && ((today.wDay > list[taskNum].day.day) && (today.wMonth == list[taskNum].day.month) && (today.wYear == list[taskNum].day.year))
+				|| ((today.wMonth > list[taskNum].day.month) && (today.wYear == list[taskNum].day.year)) || (today.wYear > list[taskNum].day.year)) {
 				list[taskNum].overdue = true;
 				cout << list[taskNum].title << endl;
 				cout << list[taskNum].detail << endl;
@@ -65,17 +65,17 @@ void displayOverdue() {
 		}
 	}
 }
-void displayDueToday() {
+void task::displayDueToday() {
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
 	else {
-		GetLocalTime(&a);
+		GetLocalTime(&today);
 		system("CLS");
 		cout << flush;
 		bool found = false;
 		for (int taskNum = 0; taskNum < counter; taskNum++) {
-			if ((!(list[taskNum].finished)) && (a.wDay == list[taskNum].day.day) && (a.wMonth == list[taskNum].day.month) && (a.wYear == list[taskNum].day.year)) {
+			if ((!(list[taskNum].finished)) && (today.wDay == list[taskNum].day.day) && (today.wMonth == list[taskNum].day.month) && (today.wYear == list[taskNum].day.year)) {
 				cout << list[taskNum].title << endl;
 				cout << list[taskNum].detail << endl;
 				cout << "Due date: " << '(' << list[taskNum].day.month << '/' << list[taskNum].day.day << '/' << list[taskNum].day.year << ')' << endl;
@@ -88,7 +88,7 @@ void displayDueToday() {
 		}
 	}
 }
-void search() {
+void task::search() {
 	int search;
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
@@ -120,7 +120,7 @@ void search() {
 		}
 	}
 }
-void stringSearch() {
+void task::stringSearch() {
 	string search;
 	system("CLS");
 	cout << flush;
@@ -141,7 +141,7 @@ void stringSearch() {
 		}
 	}
 }
-void numberSearch() {
+void task::numberSearch() {
 	int taskNum;
 	system("CLS");
 	cout << flush;
@@ -158,7 +158,7 @@ void numberSearch() {
 		cout << "TASK NUMBER INVALID!!" << endl;
 	}
 }
-void dateSearch() {
+void task::dateSearch() {
 	system("CLS");
 	cout << flush;
 	bool found = false;
