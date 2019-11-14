@@ -139,18 +139,19 @@ void task::edit() {
 			}
 			switch (part) {
 			case 1:
-				list[taskNum - 1].title;
+				cout << "Old Title: " << list[taskNum - 1].title << endl;
 				cout << "New Title: ";
 				cin.ignore();
 				getline(cin, list[taskNum - 1].title);
 				break;
 			case 2:
-				list[taskNum - 1].detail;
+				cout << "Old Details: " << list[taskNum - 1].detail << endl;
 				cout << "New Detials: ";
 				cin.ignore();
 				getline(cin, list[taskNum - 1].detail);
 				break;
 			case 3:
+				printf("Old Due date: %d/%d/%d \n", list[taskNum - 1].day.month, list[taskNum - 1].day.day, list[taskNum - 1].day.year);
 				int mm, dd, yyyy;
 				int numOfDays;
 				GetLocalTime(&today);
