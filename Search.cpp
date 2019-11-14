@@ -40,21 +40,22 @@ void task::stringSearch() {
 	string search;
 	system("CLS");
 	cout << flush;
+	int taskNum;
 	cout << "Enter the title you are looking for" << endl;
 	cin.ignore();
 	getline(cin, search);
-	for (int taskNum = 0; taskNum < counter; taskNum++) {
+	for (taskNum = 0; taskNum < counter; taskNum++) {
 		if (list[taskNum].title.find(search, 0) != string::npos) {
 			cout << "TASK FOUND!!" << endl;
 			cout << "Title: " << list[taskNum].title << endl;
 			cout << "Details: " << list[taskNum].detail << endl;
-			cout << "Due date: " << '(' << list[taskNum].day.month << '/' << list[taskNum].day.day << '/' << list[taskNum].day.year << ')' << endl;
+			printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 			cout << "Priority: " << list[taskNum].priority << endl;
-
+			cout << "----------------------------" << endl;
 		}
-		if (taskNum == counter) {
-			cout << "TASK NOT FOUND!" << endl;
-		}
+	}
+	if (taskNum == counter) {
+		cout << "TASK NOT FOUND!" << endl;
 	}
 }
 void task::numberSearch() {
@@ -67,8 +68,9 @@ void task::numberSearch() {
 		cout << "TASK FOUND!!" << endl;
 		cout << "Title: " << list[taskNum - 1].title << endl;
 		cout << "Details: " << list[taskNum - 1].detail << endl;
-		cout << "Due date: " << '(' << list[taskNum - 1].day.month << '/' << list[taskNum - 1].day.day << '/' << list[taskNum - 1].day.year << ')' << endl;
+		printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 		cout << "Priority: " << list[taskNum - 1].priority << endl;
+		cout << "----------------------------" << endl;
 	}
 	if (taskNum > counter) {
 		cout << "TASK NUMBER INVALID!!" << endl;
@@ -90,8 +92,9 @@ void task::dateSearch() {
 			cout << "TASK FOUND!!" << endl;
 			cout << "Title: " << list[taskNum].title << endl;
 			cout << "Details: " << list[taskNum].detail << endl;
-			cout << "Due date: " << '(' << list[taskNum].day.month << '/' << list[taskNum].day.day << '/' << list[taskNum].day.year << ')' << endl;
+			printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 			cout << "Priority: " << list[taskNum].priority << endl;
+			cout << "----------------------------" << endl;
 			found = true;
 			break;
 		}
