@@ -4,7 +4,9 @@ int counter = 0;
 int MAX = 100;
 task* list = new task[MAX];
 SYSTEMTIME today;
+void loading();
 int main() {
+	loading();
 	task call;
 	call.getData();
 	string loop = "y";
@@ -41,52 +43,52 @@ int main() {
 				cin.ignore();
 			}
 		}
-			switch (choice) {
-			case 1:
-				call.addTask();
-				break;
-			case 2:
-				call.taskDone();
-				break;
-			case 3:
-				call.edit();
-				break;
-			case 4:
-				call.Delete();
-				break;
-			case 5:
-				call.displayAll();
-				break;
-			case 6:
-				call.displayDone();
-				break;
-			case 7:
-				call.displayOverdue();
-				break;
-			case 8:
-				call.displayDueToday();
-				break;
-			case 9:
-				call.search();
-				break;
-			case -1:
-				break;
-			default:
-				cout << "Error! Invalid Number!" << endl;
-			}
-			loop = "k";
-			while (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
+		switch (choice) {
+		case 1:
+			call.addTask();
+			break;
+		case 2:
+			call.taskDone();
+			break;
+		case 3:
+			call.edit();
+			break;
+		case 4:
+			call.Delete();
+			break;
+		case 5:
+			call.displayAll();
+			break;
+		case 6:
+			call.displayDone();
+			break;
+		case 7:
+			call.displayOverdue();
+			break;
+		case 8:
+			call.displayDueToday();
+			break;
+		case 9:
+			call.search();
+			break;
+		case -1:
+			break;
+		default:
+			cout << "Error! Invalid Number!" << endl;
+		}
+		loop = "k";
+		while (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
+			loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
+			loop != "nO" && loop != "N" && choice != -1) {
+			cout << "Would you like to choose another task?" << endl;
+			cin >> loop;
+			if (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
 				loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
-				loop != "nO" && loop != "N" && choice != -1) {
-				cout << "Would you like to choose another task?" << endl;
-				cin >> loop;
-				if (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
-					loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
-					loop != "nO" && loop != "N") {
-					cout << "Please enter Y or N!" << endl;
-				}
+				loop != "nO" && loop != "N") {
+				cout << "Please enter Y or N!" << endl;
 			}
 		}
+	}
 	call.outData();
 	for (int j = 0; j < 3; j++) {
 		cout << "\rExiting   \rExiting";
@@ -152,4 +154,24 @@ void task::expandTasks() {
 	delete[] list;
 	list = newList;
 	MAX = newSize;
+}
+void loading() {
+	system("color 0F");
+	cout << "\n\n\n\t\t\t\tPlease wait while loading\n\n";
+	char a = 177, b = 219;
+	cout << "\t\t\t\t";
+	for (int i = 0; i <= 15; i++)
+		cout << a;
+	cout << "\r";
+	cout << "\t\t\t\t";
+	for (int i = 0; i <= 15; i++)
+	{
+		cout << b;
+		for (int j = 0; j <= 1e8; j++);
+	}
+
+	system("CLS");
+	cout << "\n\n\n\t\t\t\tTO-DO LIST\n\n\t\t\t";
+
+	_getch();
 }
