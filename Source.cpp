@@ -167,7 +167,7 @@ void loading() {
 	for (int i = 0; i <= 15; i++)
 	{
 		cout << b;
-		for (int j = 0; j <= 1e8; j++);
+		Sleep(50);
 	}
 
 	system("CLS");
