@@ -93,17 +93,33 @@ void task::taskDone() {
 	}
 	else {
 		system("CLS");
+		cout << flush;
+		int taskNum = counter;
+		int end = 0, count = 0;
 		for (int i = 0; i < counter; i++) {
-			cout << i + 1 << ". " << list[i].title << flush << endl;
+			if (!list[i].finished) {
+				cout << "Task " << i + 1 << ". " << list[i].title << endl;
+				count++;
+			}
 		}
-		cout << "Enter task number to be done: " << endl;
-		int taskNum;
-		cin >> taskNum;
-		if (list[taskNum - 1].finished) {
-			cout << "Already done!" << endl;
+		if(count == 0) {
+			cout << "All tasks are done!" << endl;
+			end = -1;
 		}
-		else {
-			list[taskNum - 1].finished = true;
+		while (end != -1) {
+			cout << "Enter task number to be done: (-1 to exit) " << endl;
+			cin >> taskNum;
+			switch (taskNum) {
+			case -1:
+				break;
+			}
+			if (list[taskNum - 1].finished) {
+				cout << "Already done!" << endl;
+			}
+			else {
+				list[taskNum - 1].finished = true;
+				end = -1;
+			}
 		}
 	}
 }
@@ -113,28 +129,39 @@ void task::edit() {
 		cout << "No tasks found!" << endl;
 	}
 	else {
+		cout << flush;
 		string loop = "y";
-		while (loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS") {
+		int taskNum = counter + 1;
+		int end = 0;
+		while (loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS" && end != -1) {
 			for (int i = 0; i < counter; i++) {
-				cout << i + 1 << ". " << list[i].title << flush << endl;
+				cout << "Task " << i + 1 << ". " << list[i].title << endl;
 			}
-			int taskNum = counter + 1;
 			while (!cin || taskNum > counter || taskNum < 1) {
-				cout << "Please enter which task you would like edit: (from 1 to " << counter << ") ";
+				cout << "Please enter which task you would like edit: (from 1 to " << counter << ") (-1 to exit) ";
 				cin >> taskNum;
-				if (cin && taskNum > counter || taskNum < 1) {
+				switch (taskNum) {
+				case -1:
+					end += -1;
+					break;
+				}
+				if (cin && taskNum > counter || taskNum < 1 && taskNum != -1) {
 					cin.clear();
 					cout << "Task not found! Please enter a valid task!" << endl;
 					cin.ignore();
 				}
 			}
+			switch (end) {
+			case -1:
+				break;
+			}
 			cout << "Which part would you like to edit?" << endl;
 			cout << "1. Title\n" << "2. Details\n" << "3. Date\n" << "4. Priority" << endl;
 			int part = 5;
-			while (!cin || part > 4 || part < 1) {
-				cout << "Please enter a number between 1 and 4: ";
+			while (!cin || part > 4 || part < 1 && part != -1) {
+				cout << "Please enter a number between 1 and 4: (-1 to exit)";
 				cin >> part;
-				if (cin && part > 4 || part < 1) {
+				if (cin && part > 4 || part < 1 && part != -1) {
 					cin.clear();
 					cout << "Invalid! Please enter a valid number!" << endl;
 					cin.ignore();
@@ -168,6 +195,8 @@ void task::edit() {
 					list[taskNum - 1].day.year = yyyy;
 					list[taskNum - 1].day.month = mm;
 					switch (list[taskNum - 1].day.month) {
+					case -1:
+						break;
 					case 1:
 						numOfDays = 31;
 						break;
@@ -241,13 +270,18 @@ void task::Delete() { //swapping and deleting last row, but data is still saved 
 	else {
 
 		system("CLS");
+		cout << flush;
 		for (int i = 0; i < counter; i++) {
-			cout << i + 1 << ". " << list[i].title << flush << endl;
+			cout << "Task " << i + 1 << ". " << list[i].title << endl;
 		}
 		cout << "Please choose task you want to delete" << endl;
 		int taskNum;
 		cin >> taskNum;
-		if (taskNum > counter) {
+		switch (taskNum) {
+		case -1:
+			break;
+		}
+		if (taskNum > counter || taskNum < 0) {
 			cout << "Task not found!" << endl;
 		}
 		else {
@@ -257,6 +291,7 @@ void task::Delete() { //swapping and deleting last row, but data is still saved 
 				list[i] = list[i + 1];
 				list[i + 1] = temp;
 			}
+			cout << "Task " << taskNum << " Deleted!" << endl;
 			counter--;
 		}
 	}
