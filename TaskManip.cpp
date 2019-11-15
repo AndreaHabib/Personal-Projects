@@ -93,7 +93,10 @@ void task::taskDone() {
 	}
 	else {
 		system("CLS");
-		cout << "Enter task number to be done: " << flush << endl;
+		for (int i = 0; i < counter; i++) {
+			cout << i + 1 << ". " << list[i].title << flush << endl;
+		}
+		cout << "Enter task number to be done: " << endl;
 		int taskNum;
 		cin >> taskNum;
 		if (list[taskNum - 1].finished) {
@@ -238,10 +241,10 @@ void task::Delete() { //swapping and deleting last row, but data is still saved 
 	else {
 
 		system("CLS");
-		cout << "Please choose task you want to delete" << flush << endl;
 		for (int i = 0; i < counter; i++) {
-			cout << i + 1 << ". " << list[i].title << endl;
+			cout << i + 1 << ". " << list[i].title << flush << endl;
 		}
+		cout << "Please choose task you want to delete" << endl;
 		int taskNum;
 		cin >> taskNum;
 		if (taskNum > counter) {
