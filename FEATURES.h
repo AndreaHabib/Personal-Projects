@@ -8,7 +8,9 @@
 #include<windows.h>
 #include<cstdlib>
 #include<cctype>
-#include<stdio.h>
+#include<time.h>
+#include<dos.h>
+#include<ctime>
 using namespace std;
 //enum month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec };
 struct date {
