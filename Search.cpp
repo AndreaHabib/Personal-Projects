@@ -40,6 +40,7 @@ void task::stringSearch() {
 	string search;
 	system("CLS");
 	cout << flush;
+	int count = 0;
 	int taskNum;
 	cout << "Enter the title you are looking for" << endl;
 	cin.ignore();
@@ -52,9 +53,10 @@ void task::stringSearch() {
 			printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 			cout << "Priority: " << list[taskNum].priority << endl;
 			cout << "----------------------------" << endl;
+			count++;
 		}
 	}
-	if (taskNum == counter) {
+	if (count == 0) {
 		cout << "TASK NOT FOUND!" << endl;
 	}
 }
@@ -62,13 +64,13 @@ void task::numberSearch() {
 	int taskNum;
 	system("CLS");
 	cout << flush;
-	cout << "Please enter the number of task you are searching for" << endl;
+	cout << "Please enter the number of task you are searching for: ";
 	cin >> taskNum;
-	if (taskNum == counter) {
+	if (taskNum < counter) {
 		cout << "TASK FOUND!!" << endl;
 		cout << "Title: " << list[taskNum - 1].title << endl;
 		cout << "Details: " << list[taskNum - 1].detail << endl;
-		printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
+		printf("Due date: %d/%d/%d \n", list[taskNum - 1].day.month, list[taskNum - 1].day.day, list[taskNum - 1].day.year);
 		cout << "Priority: " << list[taskNum - 1].priority << endl;
 		cout << "----------------------------" << endl;
 	}
