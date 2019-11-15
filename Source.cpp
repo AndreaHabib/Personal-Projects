@@ -12,6 +12,15 @@ int main() {
 	while ((loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS") && choice != -1) {
 		system("CLS");
 		cout << "Welcome to the TO-DO list" << flush << endl;
+		if (counter == 0) {
+			cout << "There are no tasks active!" << endl;
+		}
+		else if (counter == 1) {
+			cout << "You currently have " << counter << " active task." << endl;
+		}
+		else {
+			cout << "You currently have " << counter << " active tasks." << endl;
+		}
 		cout << "Please choose one of ther following:" << endl;
 		cout << "1. Add a new task" << endl;
 		cout << "2. Mark task as done" << endl;
@@ -32,7 +41,6 @@ int main() {
 				cin.ignore();
 			}
 		}
-		if (choice != -1) {
 			switch (choice) {
 			case 1:
 				call.addTask();
@@ -61,11 +69,15 @@ int main() {
 			case 9:
 				call.search();
 				break;
+			case -1:
+				break;
+			default:
+				cout << "Error! Invalid Number!" << endl;
 			}
 			loop = "k";
 			while (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
 				loop != "YES" && loop != "yes" && loop != "yES" && loop != "YeS" && loop != "No" && loop != "NO" &&
-				loop != "nO" && loop != "N") {
+				loop != "nO" && loop != "N" && choice != -1) {
 				cout << "Would you like to choose another task?" << endl;
 				cin >> loop;
 				if (loop != "y" && loop != "n" && loop != "Y" && loop != "Yes" &&
@@ -75,13 +87,12 @@ int main() {
 				}
 			}
 		}
-	}
 	call.outData();
 	for (int j = 0; j < 3; j++) {
 		cout << "\rExiting   \rExiting";
 		for (int i = 0; i < 3; i++) {
 			cout << ".";
-			Sleep(150);
+			Sleep(200);
 		}
 	}
 	cout << endl;
