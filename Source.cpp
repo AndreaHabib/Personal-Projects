@@ -157,7 +157,7 @@ void task::expandTasks() {
 }
 void loading() {
 	system("color 0F");
-	cout << "\n\n\n\t\t\t\tPlease wait while loading\n\n";
+	cout << right << setw(113) << " " << "Please wait! Loading!" << endl;
 	char a = 177, b = 219;
 	cout << "\t\t\t\t";
 	for (int i = 0; i <= 15; i++)
@@ -171,7 +171,9 @@ void loading() {
 	}
 
 	system("CLS");
-	cout << "\n\n\n\t\t\t\tTO-DO LIST\n\n\t\t\t";
-
+	//cout << "\n\n\n\t\t\t\tTO-DO LIST\n\n\t\t\t";
+	//cout << "\n\n\t\t\tPRESS ENTER TO CONTINUE\n\n\t\t\t";
+	cout << right << setw(200) << " " << "TO-DO LIST\n\n" << endl;
+	cout << right << setw(113) << " " << "PRESS ENTER TO CONTINUE" << endl;
 	_getch();
 }
