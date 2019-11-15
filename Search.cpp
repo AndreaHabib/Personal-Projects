@@ -66,7 +66,7 @@ void task::numberSearch() {
 	cout << flush;
 	cout << "Please enter the number of task you are searching for: ";
 	cin >> taskNum;
-	if (taskNum < counter) {
+	if (taskNum <= counter) {
 		cout << "TASK FOUND!!" << endl;
 		cout << "Title: " << list[taskNum - 1].title << endl;
 		cout << "Details: " << list[taskNum - 1].detail << endl;
@@ -85,7 +85,16 @@ void task::dateSearch() {
 	bool found = false;
 	int day, month, year, taskNum = 0;
 	cout << "Please enter the date of task you are searching for" << endl;
-	scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
+	int i = 1;
+	while (i != 3) {
+		i = scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
+		if (i != 3) {
+			cout << "Please enter in the correct format!" << endl;
+			cout << "Due date: (MM/DD/YYYY)" << endl;
+			fflush(stdin);
+			fseek(stdin, 0, SEEK_END);
+		}
+	}
 	day = dd;
 	month = mm;
 	year = yyyy;
