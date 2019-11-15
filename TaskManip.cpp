@@ -32,57 +32,57 @@ void task::addTask() {
 					fseek(stdin, 0, SEEK_END);
 				}
 			}
-				list[taskNum].day.day = dd;
-				list[taskNum].day.year = yyyy;
-				list[taskNum].day.month = mm;
-				switch (list[taskNum].day.month) {
-				case 1:
-					numOfDays = 31;
-					break;
-				case 2:
-					if ((list[taskNum].day.year % 4 == 0 && list[taskNum].day.year % 100 != 0) || list[taskNum].day.year % 400 == 0)
-						numOfDays = 29;
-					else numOfDays = 28;
-					break;
-				case 3:
-					numOfDays = 31;
-					break;
-				case 4:
-					numOfDays = 30;
-					break;
-				case 5:
-					numOfDays = 31;
-					break;
-				case 6:
-					numOfDays = 30;
-					break;
-				case 7:
-					numOfDays = 31;
-					break;
-				case 8:
-					numOfDays = 31;
-					break;
-				case 9:
-					numOfDays = 30;
-					break;
-				case 10:
-					numOfDays = 31;
-					break;
-				case 11:
-					numOfDays = 30;
-					break;
-				case 12:
-					numOfDays = 31;
-					break;
-				}
-				if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
-					cin.clear();
-					cout << "Invalid day for the month and year you entered!" << endl;
-					cin.ignore();
-				}
-				if (list[taskNum].day.year < today.wYear) {
-					cout << "Please enter a year within or after " << today.wYear << endl;
-				}
+			list[taskNum].day.day = dd;
+			list[taskNum].day.year = yyyy;
+			list[taskNum].day.month = mm;
+			switch (list[taskNum].day.month) {
+			case 1:
+				numOfDays = 31;
+				break;
+			case 2:
+				if ((list[taskNum].day.year % 4 == 0 && list[taskNum].day.year % 100 != 0) || list[taskNum].day.year % 400 == 0)
+					numOfDays = 29;
+				else numOfDays = 28;
+				break;
+			case 3:
+				numOfDays = 31;
+				break;
+			case 4:
+				numOfDays = 30;
+				break;
+			case 5:
+				numOfDays = 31;
+				break;
+			case 6:
+				numOfDays = 30;
+				break;
+			case 7:
+				numOfDays = 31;
+				break;
+			case 8:
+				numOfDays = 31;
+				break;
+			case 9:
+				numOfDays = 30;
+				break;
+			case 10:
+				numOfDays = 31;
+				break;
+			case 11:
+				numOfDays = 30;
+				break;
+			case 12:
+				numOfDays = 31;
+				break;
+			}
+			if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
+				cin.clear();
+				cout << "Invalid day for the month and year you entered!" << endl;
+				cin.ignore();
+			}
+			if (list[taskNum].day.year < today.wYear) {
+				cout << "Please enter a year within or after " << today.wYear << endl;
+			}
 			while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
 				cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
 				cin >> list[taskNum].priority;
@@ -109,7 +109,7 @@ void task::taskDone() {
 				count++;
 			}
 		}
-		if(count == 0) {
+		if (count == 0) {
 			cout << "All tasks are done!" << endl;
 			end = -1;
 		}
@@ -124,6 +124,7 @@ void task::taskDone() {
 				cout << "Already done!" << endl;
 			}
 			else {
+				cout << "Marked as Done!" << endl;
 				list[taskNum - 1].finished = true;
 				end = -1;
 			}
@@ -287,28 +288,29 @@ void task::Delete() { //swapping and deleting last row, but data is still saved 
 
 		system("CLS");
 		cout << flush;
+		int taskNum = 1;
 		for (int i = 0; i < counter; i++) {
 			cout << "Task " << i + 1 << ". " << list[i].title << endl;
 		}
-		cout << "Please choose task you want to delete" << endl;
-		int taskNum;
-		cin >> taskNum;
-		switch (taskNum) {
-		case -1:
-			break;
-		}
-		if (taskNum > counter || taskNum < 0) {
-			cout << "Task not found!" << endl;
-		}
-		else {
-			for (int i = taskNum; i < counter; i++) {
-				task temp;
-				temp = list[i];
-				list[i] = list[i + 1];
-				list[i + 1] = temp;
+		while (taskNum != -1) {
+		  cout << "Please choose task you want to delete: (-1 to exit) ";
+		  cin >> taskNum;
+		  if (taskNum != -1) {
+			if (taskNum > counter || taskNum < 0 && taskNum != -1) {
+				cout << "Task not found!" << endl;
 			}
-			cout << "Task " << taskNum << " Deleted!" << endl;
-			counter--;
+			else {
+				for (int i = taskNum; i < counter; i++) {
+					task temp;
+					temp = list[i];
+					list[i] = list[i + 1];
+					list[i + 1] = temp;
+				}
+				cout << "Task " << taskNum << " Deleted!" << endl;
+				counter--;
+				break;
+			}
+		  }
 		}
 	}
 }
