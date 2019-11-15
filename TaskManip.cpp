@@ -113,7 +113,7 @@ void task::taskDone() {
 			cout << "All tasks are done!" << endl;
 			end = -1;
 		}
-		while (end != -1) {
+		while (end != -1 && taskNum != -1) {
 			cout << "Enter task number to be done: (-1 to exit) " << endl;
 			cin >> taskNum;
 			switch (taskNum) {
@@ -123,7 +123,7 @@ void task::taskDone() {
 			if (list[taskNum - 1].finished) {
 				cout << "Already done!" << endl;
 			}
-			else {
+			else if(taskNum != -1) {
 				cout << "Marked as Done!" << endl;
 				list[taskNum - 1].finished = true;
 				end = -1;
@@ -160,7 +160,7 @@ void task::edit() {
 				cout << "1. Title\n" << "2. Details\n" << "3. Date\n" << "4. Priority" << endl;
 				int part = 5;
 				while (!cin || part > 4 || part < 1 && part != -1) {
-					cout << "Please enter a number between 1 and 4: (-1 to exit)";
+					cout << "Please enter a number between 1 and 4: (-1 to exit) ";
 					cin >> part;
 					if (cin && part > 4 || part < 1 && part != -1) {
 						cin.clear();
