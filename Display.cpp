@@ -21,12 +21,13 @@ void task::displayAll() {
 	}
 }
 void task::displayDone() {
+	int count = 0;
 	if (counter == 0) {
 		cout << "No tasks found!" << endl;
 	}
 	else {
+		system("CLS");
 		for (int taskNum = 0; taskNum < counter; taskNum++) {
-			system("CLS");
 			if (list[taskNum].finished) {
 				cout << "Task " << taskNum + 1 << endl;
 				cout << "Task " << list[taskNum].title << endl;
@@ -34,10 +35,11 @@ void task::displayDone() {
 				printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 				cout << "Priority: " << list[taskNum].priority << endl;
 				cout << "----------------------------" << endl;
+				count++;
 			}
-			else {
-				cout << "NO TASKS ARE DONE!" << endl;
-			}
+		}
+		if (count == 0) {
+			cout << "No tasks done!" << endl;
 		}
 	}
 }
