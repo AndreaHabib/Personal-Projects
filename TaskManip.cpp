@@ -22,69 +22,76 @@ void task::addTask() {
 		list[taskNum].day.month = 13;
 		while (list[taskNum].day.year < today.wYear || list[taskNum].day.month > 12 || list[taskNum].day.month < 1 || list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
 			cout << "Due date: (MM/DD/YYYY)" << endl;
-			scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
-			list[taskNum].day.day = dd;
-			list[taskNum].day.year = yyyy;
-			list[taskNum].day.month = mm;
-			switch (list[taskNum].day.month) {
-			case 1:
-				numOfDays = 31;
-				break;
-			case 2:
-				if ((list[taskNum].day.year % 4 == 0 && list[taskNum].day.year % 100 != 0) || list[taskNum].day.year % 400 == 0)
-					numOfDays = 29;
-				else numOfDays = 28;
-				break;
-			case 3:
-				numOfDays = 31;
-				break;
-			case 4:
-				numOfDays = 30;
-				break;
-			case 5:
-				numOfDays = 31;
-				break;
-			case 6:
-				numOfDays = 30;
-				break;
-			case 7:
-				numOfDays = 31;
-				break;
-			case 8:
-				numOfDays = 31;
-				break;
-			case 9:
-				numOfDays = 30;
-				break;
-			case 10:
-				numOfDays = 31;
-				break;
-			case 11:
-				numOfDays = 30;
-				break;
-			case 12:
-				numOfDays = 31;
-				break;
-			default:
-				cout << "Invalid month!" << endl;
-				break;
+			int i = 1;
+			while (i != 3) {
+				i = scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
+				if (i != 3) {
+					cout << "Please enter in the correct format!" << endl;
+					cout << "Due date: (MM/DD/YYYY)" << endl;
+					fflush(stdin);
+					fseek(stdin, 0, SEEK_END);
+				}
 			}
-			if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
-				cin.clear();
-				cout << "Invalid day for the month and year you entered!" << endl;
-				cin.ignore();
-			}
-			if (list[taskNum].day.year < today.wYear) {
-				cout << "Please enter a year within or after " << today.wYear << endl;
+				list[taskNum].day.day = dd;
+				list[taskNum].day.year = yyyy;
+				list[taskNum].day.month = mm;
+				switch (list[taskNum].day.month) {
+				case 1:
+					numOfDays = 31;
+					break;
+				case 2:
+					if ((list[taskNum].day.year % 4 == 0 && list[taskNum].day.year % 100 != 0) || list[taskNum].day.year % 400 == 0)
+						numOfDays = 29;
+					else numOfDays = 28;
+					break;
+				case 3:
+					numOfDays = 31;
+					break;
+				case 4:
+					numOfDays = 30;
+					break;
+				case 5:
+					numOfDays = 31;
+					break;
+				case 6:
+					numOfDays = 30;
+					break;
+				case 7:
+					numOfDays = 31;
+					break;
+				case 8:
+					numOfDays = 31;
+					break;
+				case 9:
+					numOfDays = 30;
+					break;
+				case 10:
+					numOfDays = 31;
+					break;
+				case 11:
+					numOfDays = 30;
+					break;
+				case 12:
+					numOfDays = 31;
+					break;
+				}
+				if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
+					cin.clear();
+					cout << "Invalid day for the month and year you entered!" << endl;
+					cin.ignore();
+				}
+				if (list[taskNum].day.year < today.wYear) {
+					cout << "Please enter a year within or after " << today.wYear << endl;
+				}
+			while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
+				cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
+				cin >> list[taskNum].priority;
+				if (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
+					cout << "Please enter a number between 0 and 9!" << endl;
+				}
 			}
 		}
-		while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
-			cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
-			cin >> list[taskNum].priority;
-			if (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
-				cout << "Please enter a number between 0 and 9!" << endl;
-			}
-		}
+
 	}
 }
 void task::taskDone() {
@@ -190,7 +197,16 @@ void task::edit() {
 				list[taskNum - 1].day.month = 13;
 				while (list[taskNum - 1].day.year < today.wYear || list[taskNum - 1].day.month > 12 || list[taskNum - 1].day.month < 1 || list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
 					cout << " New Due date: (MM/DD/YYYY)" << endl;
-					scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
+					int i = 1;
+					while (i != 3) {
+						i = scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
+						if (i != 3) {
+							cout << "Please enter in the correct format!" << endl;
+							cout << "Due date: (MM/DD/YYYY)" << endl;
+							fflush(stdin);
+							fseek(stdin, 0, SEEK_END);
+						}
+					}
 					list[taskNum - 1].day.day = dd;
 					list[taskNum - 1].day.year = yyyy;
 					list[taskNum - 1].day.month = mm;
