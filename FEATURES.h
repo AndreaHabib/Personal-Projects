@@ -11,6 +11,7 @@
 #include<time.h>
 #include<dos.h>
 #include<ctime>
+#include<conio.h>
 using namespace std;
 //enum month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec };
 struct date {
