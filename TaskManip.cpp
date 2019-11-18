@@ -74,6 +74,9 @@ void task::addTask() {
 			case 12:
 				numOfDays = 31;
 				break;
+			default:
+				cout << "Invalid month!\n";
+				numOfDays = list[taskNum - 1].day.day;
 			}
 			if (list[taskNum].day.day > numOfDays || list[taskNum].day.day < 1) {
 				cin.clear();
@@ -83,12 +86,12 @@ void task::addTask() {
 			if (list[taskNum].day.year < today.wYear) {
 				cout << "Please enter a year within or after " << today.wYear << endl;
 			}
-			while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
-				cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
-				cin >> list[taskNum].priority;
-				if (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
-					cout << "Please enter a number between 0 and 9!" << endl;
-				}
+		}
+		while (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
+			cout << "Priority: (Enter a number between 0 and 9 --> 0 least importance and 9 most importance) ";
+			cin >> list[taskNum].priority;
+			if (list[taskNum].priority > 9 || list[taskNum].priority < 0) {
+				cout << "Please enter a number between 0 and 9!" << endl;
 			}
 		}
 
@@ -192,13 +195,13 @@ void task::edit() {
 					list[taskNum - 1].day.year = 2018;
 					list[taskNum - 1].day.month = 13;
 					while (list[taskNum - 1].day.year < today.wYear || list[taskNum - 1].day.month > 12 || list[taskNum - 1].day.month < 1 || list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
-						cout << " New Due date: (MM/DD/YYYY)" << endl;
+						cout << "New Due date: (MM/DD/YYYY)" << endl;
 						int i = 1;
 						while (i != 3) {
 							i = scanf_s("%d/%d/%d", &mm, &dd, &yyyy);
 							if (i != 3) {
 								cout << "Please enter in the correct format!" << endl;
-								cout << "Due date: (MM/DD/YYYY)" << endl;
+								cout << "New Due date: (MM/DD/YYYY)" << endl;
 								fflush(stdin);
 								fseek(stdin, 0, SEEK_END);
 							}
@@ -247,7 +250,8 @@ void task::edit() {
 							break;
 						default:
 							cout << "Invalid month!" << endl;
-							break;
+							numOfDays = list[taskNum - 1].day.day;
+							//break;
 						}
 						if (list[taskNum - 1].day.day > numOfDays || list[taskNum - 1].day.day < 1) {
 							cin.clear();
