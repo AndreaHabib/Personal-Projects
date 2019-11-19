@@ -13,26 +13,31 @@ int main() {
 	int choice = 1;
 	while ((loop == "y" || loop == "Y" || loop == "Yes" || loop == "YES" || loop == "yes" || loop == "yES" || loop == "YeS") && choice != -1) {
 		system("CLS");
-		cout << "Welcome to the TO-DO list" << flush << endl;
+		cout << "***************************************************************" << endl;
+		cout << "* Welcome to the TO-DO list" << setw(36) << "*" << flush << endl;
 		if (counter == 0) {
-			cout << "There are no tasks active!" << endl;
+			cout << "* There are no tasks active!" << setw(35) << "*" << endl;
 		}
 		else if (counter == 1) {
-			cout << "You currently have " << counter << " active task." << endl;
+			cout << "* You currently have " << counter << " active task." << setw(28) << "*" << endl;
+		}
+		else if(counter > 10) {
+			cout << "* You currently have " << counter << " active tasks." << setw(26) << "*" << endl;
 		}
 		else {
-			cout << "You currently have " << counter << " active tasks." << endl;
+			cout << "* You currently have " << counter << " active tasks." << setw(27) << "*" << endl;
 		}
-		cout << "Please choose one of ther following:" << endl;
-		cout << "1. Add a new task" << endl;
-		cout << "2. Mark task as done" << endl;
-		cout << "3. Edit any task" << endl;
-		cout << "4. Delete any task" << endl;
-		cout << "5. Display all tasks" << endl;
-		cout << "6. Display all done tasks" << endl;
-		cout << "7. Display all overdue tasks" << endl;
-		cout << "8. Display all tasks that needs to be done today" << endl;
-		cout << "9. Search for specific task (using Title, Task Number, date)" << endl;
+		cout << "* Please choose one of ther following:"  << setw(25) << "*" << endl;
+		cout << "* 1. Add a new task" << setw(44) << "*" << endl;
+		cout << "* 2. Mark task as done" << setw(41) << "*" << endl;
+		cout << "* 3. Edit any task" << setw(45) << "*" << endl;
+		cout << "* 4. Delete any task" << setw(43) << "*" << endl;
+		cout << "* 5. Display all tasks" << setw(41) << "*" << endl;
+		cout << "* 6. Display all done tasks" << setw(36) << "*" << endl;
+		cout << "* 7. Display all overdue tasks" << setw(33) << "*" << endl;
+		cout << "* 8. Display all tasks that needs to be done today" << setw(13) << "*" << endl;
+		cout << "* 9. Search for specific task (using Title, Task Number, date)*" << endl;
+		cout << "***************************************************************" << endl;
 		int choice = 11;
 		while (!cin || choice > 10 || choice < 1 && choice != -1) {
 			cout << "Please enter a number between 1 and 9: (-1 to exit) ";
@@ -97,7 +102,8 @@ int main() {
 			Sleep(200);
 		}
 	}
-	cout << endl;
+	system("CLS");
+	cout << flush;
 	system("PAUSE");
 	return 0;
 }
