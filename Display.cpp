@@ -30,7 +30,7 @@ void task::displayDone() {
 		for (int taskNum = 0; taskNum < counter; taskNum++) {
 			if (list[taskNum].finished) {
 				cout << "Task " << taskNum + 1 << endl;
-				cout << "Task " << list[taskNum].title << endl;
+				cout << "Task: " << list[taskNum].title << endl;
 				cout << "Details: " << list[taskNum].detail << endl;
 				printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 				cout << "Priority: " << list[taskNum].priority << endl;
@@ -83,7 +83,7 @@ void task::displayDueToday() {
 		for (int taskNum = 0; taskNum < counter; taskNum++) {
 			if ((!(list[taskNum].finished)) && (today.wDay == list[taskNum].day.day) && (today.wMonth == list[taskNum].day.month) && (today.wYear == list[taskNum].day.year)) {
 				cout << "Task " << taskNum + 1 << endl;
-				cout << "Task " << list[taskNum].title << endl;
+				cout << "Task: " << list[taskNum].title << endl;
 				cout << "Details: " << list[taskNum].detail << endl;
 				printf("Due date: %d/%d/%d \n", list[taskNum].day.month, list[taskNum].day.day, list[taskNum].day.year);
 				cout << "Priority: " << list[taskNum].priority << endl;
