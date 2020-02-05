@@ -129,6 +129,7 @@ void task::taskDone() {
 			else if(taskNum != -1) {
 				cout << "Marked as Done!" << endl;
 				list[taskNum - 1].finished = true;
+				list[taskNum - 1].overdue = false;
 				end = -1;
 			}
 		}
