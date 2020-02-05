@@ -54,9 +54,12 @@ void task::displayOverdue() {
 		cout << flush;
 		int taskNum = 0;
 		for (taskNum = 0; taskNum < counter; taskNum++) {
-			if (!(list[taskNum].finished) && ((today.wDay > list[taskNum].day.day) && (today.wMonth == list[taskNum].day.month) && (today.wYear == list[taskNum].day.year))
-				|| ((today.wMonth > list[taskNum].day.month) && (today.wYear == list[taskNum].day.year)) || (today.wYear > list[taskNum].day.year)) {
+			if (list[taskNum].finished == false) {
 				list[taskNum].overdue = true;
+			}
+			else list[taskNum].overdue = false;
+			if (!(list[taskNum].finished) && (((today.wDay > list[taskNum].day.day) && (today.wMonth == list[taskNum].day.month) && (today.wYear == list[taskNum].day.year))
+				|| ((today.wMonth > list[taskNum].day.month) && (today.wYear == list[taskNum].day.year)) || (today.wYear > list[taskNum].day.year))) {
 				cout << "Task " << taskNum + 1 << endl;
 				cout << "Task " << list[taskNum].title << endl;
 				cout << "Details: " << list[taskNum].detail << endl;
