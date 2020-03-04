@@ -1,0 +1,3 @@
+While this doesn't have a life version, it should represent my knowledge and experience with C++ and everything I have learnt so far.
+This is a program where you can add, edit, delete any task, as well as you can display or search for the tasks.
+Tested and program should never stop working and keep running even if the user gives wrong input.
